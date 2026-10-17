@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-void text-ink font-body antialiased;
+
+  background-image:
+    radial-gradient(
+      1200px 600px at 15% -10%,
+      rgba(59, 130, 246, 0.10),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 100% 10%,
+      rgba(34, 211, 238, 0.08),
+      transparent 55%
+    );
+
+  background-attachment: fixed;
+}
+
+/* Visible keyboard focus everywhere, styled to match the brand */
+:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ================================
+   PenX Custom Cursor System
+   ================================ */
+
+html,
+body,
+#root {
+  cursor: url("/cursors/penx-default.png") 3 3, auto !important;
+}
+
+button,
+a,
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  cursor: url("/cursors/penx-hover.png") 3 3, pointer !important;
+}
+
+button:active,
+a:active,
+[role="button"]:active {
+  cursor: url("/cursors/penx-click.png") 3 3, pointer !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
+:disabled,
+[aria-disabled="true"] {
+  cursor: url("/cursors/penx-disabled.png") 3 3, not-allowed !important;
+}

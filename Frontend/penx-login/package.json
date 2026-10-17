@@ -1,0 +1,74 @@
+{
+  "name": "penx-login",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "electron": "electron .",
+    "electron:dev": "concurrently -k \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pack:win": "npm run build && electron-builder --win --x64 --dir",
+    "dist:win": "npm run build && electron-builder --win nsis --x64 --publish never"
+  },
+  "dependencies": {
+    "axios": "^1.18.1",
+    "electron-is-dev": "^3.0.1",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.383.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.18.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^9.2.1",
+    "electron": "^43.1.1",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.0",
+    "wait-on": "^9.0.1",
+    "electron-builder": "^26.0.0"
+  },
+  "description": "PenX USB file security desktop application",
+  "build": {
+    "appId": "com.penx.desktop",
+    "productName": "PenX",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json",
+      "!**/.env",
+      "!**/.env.*"
+    ],
+    "win": {
+      "icon": "electron/assets/penx.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PenX",
+      "installerIcon": "electron/assets/penx.ico",
+      "uninstallerIcon": "electron/assets/penx.ico",
+      "artifactName": "PenX-Setup-${version}-${arch}.${ext}"
+    }
+  }
+}
